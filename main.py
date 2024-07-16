@@ -106,7 +106,7 @@ payload = {"content": message + "\n\n-----------------------------------\n"}
 
 print(message)
 
-discord_channel_url = "https://discord.com/api/v9/channels/1250363649579810817/messages"
+discord_channel_url = "https://discord.com/api/v9/channels/1262761214514040873/messages"
 headers = {
     "Authorization": os.environ.get("DISCORD_AUTH_KEY")
 }  # auth key needed to send messages through discord
