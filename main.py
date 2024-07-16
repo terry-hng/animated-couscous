@@ -6,27 +6,41 @@ import requests
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from webdriver_manager.chrome import ChromeDriverManager
-from webdriver_manager.utils import ChromeType
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
+import chromedriver_autoinstaller
+from pyvirtualdisplay import Display
+
+display = Display(visible=0, size=(800, 800))  
+display.start()
+
+chromedriver_autoinstaller.install()  # Check if the current version of chromedriver exists
+                                      # and if it doesn't exist, download it automatically,
+                                      # then add chromedriver to path
 
 chrome_service = Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install())
 
-chrome_options = Options()
+chrome_options = webdriver.ChromeOptions()
+# Add your options as needed    
 options = [
-    "--headless",
-    "--disable-gpu",
-    "--window-size=1920,1200",
-    "--ignore-certificate-errors",
-    "--disable-extensions",
-    "--no-sandbox",
-    "--disable-dev-shm-usage"
+  # Define window size here
+   "--window-size=1200,1200",
+    "--ignore-certificate-errors"
+ 
+    #"--headless",
+    #"--disable-gpu",
+    #"--window-size=1920,1200",
+    #"--ignore-certificate-errors",
+    #"--disable-extensions",
+    #"--no-sandbox",
+    #"--disable-dev-shm-usage",
+    #'--remote-debugging-port=9222'
 ]
+
 for option in options:
     chrome_options.add_argument(option)
 
-driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
+driver = webdriver.Chrome(options = chrome_options)
 driver.maximize_window()
 driver.get("https://cryptocurrency.market/")
 
